@@ -13,12 +13,15 @@ app.use(express.json());
 app.use(cors());
 
 // Import Routes
-// const userRoutes = require('./routes/userRoutes'); // Example of user-related routes
-// const projectRoutes = require('./routes/projectRoutes'); // Example of project-related routes
+const userRoutes = require('./routes/userRoutes'); // Example of user-related routes
+const projectRoutes = require('./routes/projectRoutes'); // Example of project-related routes
+const adminRoutes = require('./routes/adminRoutes');
+
 
 // Use Routes
-// app.use('/api/users', userRoutes);
-// app.use('/api/projects', projectRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/projects', projectRoutes);
+app.use('/api/admin', adminRoutes);
 
 connectDB();
 
