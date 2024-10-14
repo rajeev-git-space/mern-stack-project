@@ -1,23 +1,32 @@
-import React, { useState, useContext } from 'react';
+// src/components/Login.js
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '../context/AuthContext';
+import api from '../services/api';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { loginUser } = useContext(AuthContext);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        await loginUser(email, password);
-        navigate('/');
+        setError('');
+        try {
+            const response = await api.post('/users/login', { email, password });
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('role', response.data.role);
+            navigate('/dashboard');
+        } catch (err) {
+            setError(err.response?.data?.message || 'An error occurred');
+        }
     };
 
     return (
-        <div className="login-container">
-            <form onSubmit={handleSubmit}>
-                <h2>Login</h2>
+        <div>
+            <h2>Login</h2>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <form onSubmit={handleLogin}>
                 <input
                     type="email"
                     placeholder="Email"
