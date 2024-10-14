@@ -1,0 +1,11 @@
+/* Add some basic styling */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.login-container, .profile-container, .projects-container, .notifications-container, .dashboard-container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}

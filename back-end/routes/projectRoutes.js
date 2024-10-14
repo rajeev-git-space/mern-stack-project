@@ -10,10 +10,10 @@ const protect = require('../middlewares/authMiddleware'); // Ensure only authent
 const router = express.Router();
 
 // POST /api/projects - Create a new project (protected, only for project owners)
-router.post('/', protect, createProject);
+router.post('/create-project', protect, createProject);
 
 // GET /api/projects - Get all open projects (accessible by anyone, for freelancers to view)
-router.get('/', getAllProjects);
+router.get('/get-projects', getAllProjects);
 
 // GET /api/projects/my - Get projects created by the logged-in user (protected)
 router.get('/my', protect, getMyProjects);

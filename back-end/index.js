@@ -4,7 +4,7 @@ const cors = require('cors');
 
 const PORT = process.env.PORT || 8000;
 
-const {connectDB} = require('./config/db');
+const { connectDB } = require('./config/db');
 
 const app = express();
 
@@ -17,14 +17,17 @@ const userRoutes = require('./routes/userRoutes'); // Example of user-related ro
 const projectRoutes = require('./routes/projectRoutes'); // Example of project-related routes
 const adminRoutes = require('./routes/adminRoutes');
 
+connectDB();
 
 // Use Routes
 app.use('/api/users', userRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/admin', adminRoutes);
 
-connectDB();
 
+app.get("/", (req, res) => {
+  res.send("Welcome to Index File!");
+});
 
 // Start the server
 app.listen(PORT, () => {
